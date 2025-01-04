@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import TodoItem from './TodoItem';
 import TodoForm from './TodoForm';
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
 
+  // Fetch todos from the backend
   const fetchTodos = async () => {
     try {
       const response = await axios.get('http://localhost:5001/todos');
@@ -21,10 +21,12 @@ const TodoList = () => {
     fetchTodos();
   }, []);
 
+  // Add a new todo to the list
   const addTodo = (newTodo) => {
     setTodos((prevTodos) => [...prevTodos, newTodo]);
   };
 
+  // Delete a todo from the list
   const deleteTodo = async (id) => {
     try {
       const response = await fetch(`http://localhost:5001/todos/${id}`, {
@@ -42,13 +44,13 @@ const TodoList = () => {
   };
 
   return (
-    <div>
-      <h1>Todo List</h1>
-      <TodoForm onAddTodo={addTodo} className="todo-form"/>
+    <div className="todo-list-container">
+      <h1 className="todo-list-header">Todo List</h1>
+      <TodoForm onAddTodo={addTodo} />
       <ul className="todo-list">
         {todos.map((todo) => (
           <li key={todo._id} className="todo-item">
-            <span>{todo.title}</span>
+            <span className="todo-text">{todo.title}</span>
             <button onClick={() => deleteTodo(todo._id)} className="delete-btn">
               <FontAwesomeIcon icon={faTrashAlt} />
             </button>
