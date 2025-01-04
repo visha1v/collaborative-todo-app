@@ -14,7 +14,7 @@ A full-stack todo application built with **React.js**, **Node.js**, **Express**,
 
 ```
 /collaborative-todo-app/
-├── backend/                           # Node.js backend
+├── collaborative-todo-app-backend/    # Node.js backend
 │   ├── .gitignore
 │   ├── server.js                     # Server entry point
 │   ├── routes/                       # API routes
